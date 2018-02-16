@@ -31,6 +31,8 @@ namespace MazaiCounter
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<HomePage>();
+            containerRegistry.RegisterForNavigation<AboutPage>();
         }
     }
 }

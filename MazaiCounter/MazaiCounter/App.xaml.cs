@@ -5,6 +5,7 @@ using MazaiCounter.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
+using MazaiCounter.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MazaiCounter
@@ -36,6 +37,7 @@ namespace MazaiCounter
             containerRegistry.RegisterForNavigation<GraphPage>();
             containerRegistry.RegisterForNavigation<ListPage>();
             containerRegistry.RegisterForNavigation<EditPage>();
+            containerRegistry.RegisterInstance(new MazaiHolder());
         }
     }
 }

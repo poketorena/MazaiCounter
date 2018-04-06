@@ -18,12 +18,13 @@ namespace MazaiCounter
          */
         public App() : this(null) { }
 
-        public App(IPlatformInitializer initializer) : base(initializer) { }
+        public App(IPlatformInitializer initializer) : base(initializer)
+        {
+        }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
@@ -31,8 +32,10 @@ namespace MazaiCounter
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
-            containerRegistry.RegisterForNavigation<HomePage>();
-            containerRegistry.RegisterForNavigation<AboutPage>();
+            containerRegistry.RegisterForNavigation<CalendarPage>();
+            containerRegistry.RegisterForNavigation<GraphPage>();
+            containerRegistry.RegisterForNavigation<ListPage>();
+            containerRegistry.RegisterForNavigation<EditPage>();
         }
     }
 }

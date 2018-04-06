@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MazaiCounter.Views.EditPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:MazaiCounter.Converters"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="EditPage"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cv:IntToMazaiTypeDeconverter x:Key="IntToMazaiTypeDeconverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Label Text="Date" />
+        <DatePicker Date="{Binding MazaiNote.Date}" />
+        <Label Text="Time" />
+        <TimePicker Time="{Binding MazaiNote.TimeSpan}" />
+        <Label Text="Type" />
+        <Picker
+            Title="選択してください"
+            SelectedIndex="{Binding MazaiNote.Type, Converter={StaticResource IntToMazaiTypeDeconverter}, Mode=OneWayToSource}"
+            VerticalOptions="Start">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>RedBull</x:String>
+                    <x:String>Monster</x:String>
+                    <x:String>Monster Absolutely Zero</x:String>
+                    <x:String>Monster KHAOS</x:String>
+                    <x:String>Monster THE DOCTOR</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Label Text="Memo" />
+        <Editor Text="{Binding MazaiNote.Memo}" VerticalOptions="FillAndExpand" />
+        <Button
+            BackgroundColor="#2196F3"
+            Command="{Binding SaveCommand}"
+            HeightRequest="58"
+            HorizontalOptions="Center"
+            Text="Save"
+            TextColor="White"
+            VerticalOptions="Center"
+            WidthRequest="330" />
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MazaiCounter.Views.ListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:MazaiCounter.Converters"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="LIST"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cv:MazaiTypeToStringConverter x:Key="MazaiTypeToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Orientation="Vertical">
+        <ListView x:Name="ListViewMazaiNotes" ItemsSource="{Binding MazaiNotes.Value}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell Detail="{Binding Type, Converter={StaticResource MazaiTypeToStringConverter}, Mode=OneWay}" Text="{Binding Date, Mode=OneWay}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button
+            BackgroundColor="#2196F3"
+            Command="{Binding NavigateMazaiInfoCommand}"
+            HeightRequest="58"
+            HorizontalOptions="Center"
+            Text="Add"
+            TextColor="White"
+            VerticalOptions="Center"
+            WidthRequest="330" />
+    </StackLayout>
+</ContentPage>

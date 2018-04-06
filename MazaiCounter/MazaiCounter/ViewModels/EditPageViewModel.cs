@@ -17,17 +17,12 @@ namespace MazaiCounter.ViewModels
         // プロパティ
         public ReactiveProperty<ObservableCollection<MazaiNote>> MazaiNotes { get; }
 
-        private MazaiNote _mazaiNote;
-        public MazaiNote MazaiNote
-        {
-            get { return _mazaiNote; }
-            set { SetProperty(ref _mazaiNote, value); }
-        }
+        public ReactiveProperty<MazaiNote> MazaiNote { get; } = new ReactiveProperty<MazaiNote>();
 
         // パブリック関数
         public override void OnNavigatingTo(NavigationParameters navigationParameters)
         {
-            MazaiNote = new MazaiNote()
+            MazaiNote.Value = new MazaiNote()
             {
                 Date = DateTime.Now,
                 TimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
@@ -47,7 +42,7 @@ namespace MazaiCounter.ViewModels
             _mazaiHolder = mazaiHolder;
             MazaiNotes = _mazaiHolder.ToReactivePropertyAsSynchronized(x => x.MazaiNotes);
 
-            MazaiNote = new MazaiNote()
+            MazaiNote.Value = new MazaiNote()
             {
                 Date = DateTime.Now,
                 TimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
@@ -59,7 +54,7 @@ namespace MazaiCounter.ViewModels
         // プライベート関数
         private async void ExecuteSave()
         {
-            MazaiNotes.Value.Add(MazaiNote);
+            MazaiNotes.Value.Add(MazaiNote.Value);
             await _mazaiHolder.SaveAsync();
             await NavigationService.GoBackAsync();
         }

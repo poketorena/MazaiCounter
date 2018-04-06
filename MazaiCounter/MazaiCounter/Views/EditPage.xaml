@@ -16,13 +16,13 @@
 
     <StackLayout>
         <Label Text="Date" />
-        <DatePicker Date="{Binding MazaiNote.Date}" />
+        <DatePicker Date="{Binding MazaiNote.Value.Date}" />
         <Label Text="Time" />
-        <TimePicker Time="{Binding MazaiNote.TimeSpan}" />
+        <TimePicker Time="{Binding MazaiNote.Value.TimeSpan}" />
         <Label Text="Type" />
         <Picker
             Title="選択してください"
-            SelectedIndex="{Binding MazaiNote.Type, Converter={StaticResource IntToMazaiTypeDeconverter}, Mode=OneWayToSource}"
+            SelectedIndex="{Binding MazaiNote.Value.Type, Converter={StaticResource IntToMazaiTypeDeconverter}, Mode=OneWayToSource}"
             VerticalOptions="Start">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -35,7 +35,7 @@
             </Picker.ItemsSource>
         </Picker>
         <Label Text="Memo" />
-        <Editor Text="{Binding MazaiNote.Memo}" VerticalOptions="FillAndExpand" />
+        <Editor Text="{Binding MazaiNote.Value.Memo}" VerticalOptions="FillAndExpand" />
         <Button
             BackgroundColor="#2196F3"
             Command="{Binding SaveCommand}"

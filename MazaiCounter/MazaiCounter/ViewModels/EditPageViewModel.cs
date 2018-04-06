@@ -35,7 +35,7 @@ namespace MazaiCounter.ViewModels
             _saveCommand ?? (_saveCommand = new DelegateCommand(ExecuteSaveCommand));
 
         // DI注入を受ける変数
-        private MazaiHolder _mazaiHolder;
+        private readonly MazaiHolder _mazaiHolder;
 
         // コンストラクタ
         public EditPageViewModel(INavigationService navigationService, MazaiHolder mazaiHolder)

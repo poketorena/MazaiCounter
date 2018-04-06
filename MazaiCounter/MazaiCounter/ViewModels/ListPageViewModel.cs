@@ -25,7 +25,7 @@ namespace MazaiCounter.ViewModels
             _navigateMazaiInfoCommand ?? (_navigateMazaiInfoCommand = new DelegateCommand(() => NavigationService.NavigateAsync(nameof(EditPage))));
 
         // DI注入を受ける変数
-        private MazaiHolder _mazaiHolder;
+        private readonly MazaiHolder _mazaiHolder;
 
         // コンストラクタ
         public ListPageViewModel(INavigationService navigationService, MazaiHolder mazaiHolder)

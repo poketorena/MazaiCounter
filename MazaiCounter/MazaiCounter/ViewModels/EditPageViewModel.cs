@@ -30,7 +30,9 @@ namespace MazaiCounter.ViewModels
         }
 
         // デリゲートコマンド
-        public DelegateCommand SaveCommand { get; }
+        private DelegateCommand _saveCommand;
+        public DelegateCommand SaveCommand =>
+            _saveCommand ?? (_saveCommand = new DelegateCommand(ExecuteSaveCommand));
 
         // DI注入を受ける変数
         private MazaiHolder _mazaiHolder;
@@ -47,12 +49,10 @@ namespace MazaiCounter.ViewModels
                 Date = DateTime.Now,
                 TimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             };
-
-            SaveCommand = new DelegateCommand(ExecuteSave);
         }
 
         // プライベート関数
-        private async void ExecuteSave()
+        private async void ExecuteSaveCommand()
         {
             MazaiNotes.Value.Add(MazaiNote.Value);
             await _mazaiHolder.SaveAsync();

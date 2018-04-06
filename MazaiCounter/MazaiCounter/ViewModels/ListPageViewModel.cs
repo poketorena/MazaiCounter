@@ -20,7 +20,9 @@ namespace MazaiCounter.ViewModels
         // パブリック関数
 
         // デリゲートコマンド
-        public DelegateCommand NavigateMazaiInfoCommand { get; }
+        private DelegateCommand _navigateMazaiInfoCommand;
+        public DelegateCommand NavigateMazaiInfoCommand =>
+            _navigateMazaiInfoCommand ?? (_navigateMazaiInfoCommand = new DelegateCommand(() => NavigationService.NavigateAsync(nameof(EditPage))));
 
         // DI注入を受ける変数
         private MazaiHolder _mazaiHolder;
@@ -32,11 +34,6 @@ namespace MazaiCounter.ViewModels
             _mazaiHolder = mazaiHolder;
 
             MazaiNotes = _mazaiHolder.ToReactivePropertyAsSynchronized(x => x.MazaiNotes);
-
-            NavigateMazaiInfoCommand = new DelegateCommand(() =>
-            {
-                NavigationService.NavigateAsync(nameof(EditPage));
-            });
         }
     }
 }

@@ -10,7 +10,8 @@
         <Label Text="Welcome to Xamarin Forms and Prism!" />
     </StackLayout>-->
 
-    <Views:HomePage />
-    <Views:AboutPage />
+    <Views:ListPage />
+    <Views:CalendarPage />
+    <Views:GraphPage />
 
 </TabbedPage>

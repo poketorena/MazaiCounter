@@ -14,7 +14,9 @@ namespace MazaiCounter.ViewModels
 {
     public class EditPageViewModel : ViewModelBase
     {
-        private MazaiHolder _mazaiHolder;
+        // プロパティ
+        public ReactiveProperty<ObservableCollection<MazaiNote>> MazaiNotes { get; }
+
         private MazaiNote _mazaiNote;
         public MazaiNote MazaiNote
         {
@@ -22,10 +24,23 @@ namespace MazaiCounter.ViewModels
             set { SetProperty(ref _mazaiNote, value); }
         }
 
-        public ReactiveProperty<ObservableCollection<MazaiNote>> MazaiNotes { get; }
+        // パブリック関数
+        public override void OnNavigatingTo(NavigationParameters navigationParameters)
+        {
+            MazaiNote = new MazaiNote()
+            {
+                Date = DateTime.Now,
+                TimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
+            };
+        }
 
+        // デリゲートコマンド
         public DelegateCommand SaveCommand { get; }
 
+        // DI注入を受ける変数
+        private MazaiHolder _mazaiHolder;
+
+        // コンストラクタ
         public EditPageViewModel(INavigationService navigationService, MazaiHolder mazaiHolder)
             : base(navigationService)
         {
@@ -41,15 +56,7 @@ namespace MazaiCounter.ViewModels
             SaveCommand = new DelegateCommand(ExecuteSave);
         }
 
-        public override void OnNavigatingTo(NavigationParameters navigationParameters)
-        {
-            MazaiNote = new MazaiNote()
-            {
-                Date = DateTime.Now,
-                TimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
-            };
-        }
-
+        // プライベート関数
         private async void ExecuteSave()
         {
             MazaiNotes.Value.Add(MazaiNote);

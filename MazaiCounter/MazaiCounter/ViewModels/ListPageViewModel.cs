@@ -14,12 +14,18 @@ namespace MazaiCounter.ViewModels
 {
     public class ListPageViewModel : ViewModelBase
     {
-        private MazaiHolder _mazaiHolder;
-
+        // プロパティ
         public ReactiveProperty<ObservableCollection<MazaiNote>> MazaiNotes { get; }
 
+        // パブリック関数
+
+        // デリゲートコマンド
         public DelegateCommand NavigateMazaiInfoCommand { get; }
-        
+
+        // DI注入を受ける変数
+        private MazaiHolder _mazaiHolder;
+
+        // コンストラクタ
         public ListPageViewModel(INavigationService navigationService, MazaiHolder mazaiHolder)
             : base(navigationService)
         {
